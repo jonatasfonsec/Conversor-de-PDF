@@ -9,28 +9,19 @@ import org.apache.pdfbox.text.PDFTextStripper;
 
 public class ArquivoPDF {
 	
-	String textoConvertido="Vazio";
-	
-	public String getTextoConvertido() {
-		return textoConvertido;
-	}
 
-	public void setTextoConvertido(String textoConvertido) {
-		this.textoConvertido = textoConvertido;
-	}
-
-	public void leArquivoPDF(String ArquivoPDF) throws IOException {
+	public String leArquivoPDFEArmazenaEmString(String ArquivoPDF) throws IOException {
 		File file = new File(ArquivoPDF);
 		PDDocument document = Loader.loadPDF(file);
-		
+		String textoConvertido = "";
 		
 		if (!document.isEncrypted()) {
 		    PDFTextStripper stripper = new PDFTextStripper();
 		    String text = stripper.getText(document);
-		    setTextoConvertido(text);
+		    textoConvertido = text;
 		    System.out.println("Text:" + text);
 		}
 		document.close();
-	
+	return textoConvertido;
 	}
 }

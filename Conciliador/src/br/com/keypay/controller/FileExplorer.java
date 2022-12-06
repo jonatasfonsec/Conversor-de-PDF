@@ -7,7 +7,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
 public class FileExplorer {
+	
+	
+	ArquivoPDF arquivoPDF = new ArquivoPDF();
+	
 	public FileExplorer() throws IOException {
+		
+		
 
 		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF","pdf");
@@ -18,8 +24,8 @@ public class FileExplorer {
 		int returnValue = jfc.showOpenDialog(null);
 		
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			ArquivoPDF arquivoPDF = new ArquivoPDF();
-			arquivoPDF.leArquivoPDF(jfc.getSelectedFile().getPath());
+			
+			arquivoPDF.leArquivoPDFEArmazenaEmString(jfc.getSelectedFile().getPath());
 			
 			
 		}
