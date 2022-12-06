@@ -7,21 +7,33 @@ import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
+import br.com.keypay.model.ValorMultilateralProduto;
+
 public class ArquivoPDF {
 	
+	String textoConvertido ="";
+
+	public String getTextoConvertido() {
+		return textoConvertido;
+	}
+
+	public void setTextoConvertido(String textoConvertido) {
+		this.textoConvertido = textoConvertido;
+	}
 
 	public String leArquivoPDFEArmazenaEmString(String ArquivoPDF) throws IOException {
 		File file = new File(ArquivoPDF);
 		PDDocument document = Loader.loadPDF(file);
-		String textoConvertido = "";
 		
 		if (!document.isEncrypted()) {
 		    PDFTextStripper stripper = new PDFTextStripper();
 		    String text = stripper.getText(document);
-		    textoConvertido = text;
-		    System.out.println("Text:" + text);
+		    setTextoConvertido(text);
+		    //System.out.println("Text:" + text);
 		}
 		document.close();
 	return textoConvertido;
 	}
+	
+	
 }

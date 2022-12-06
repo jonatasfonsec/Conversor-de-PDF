@@ -1,7 +1,6 @@
 package br.com.keypay.view;
 
 import java.awt.BorderLayout;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -12,21 +11,27 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
 import br.com.keypay.controller.ArquivoPDF;
+import br.com.keypay.model.ValorMultilateralProduto;
 
 public class Janela {
-	JButton botao = new JButton();
+	
+	
+	JButton botaoProcurarArquivo = new JButton();
+	JButton botaoCalcularValores = new JButton();
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
 	Dimension screenSize = toolkit.getScreenSize();
 	JPanel painel = new JPanel();
 	JFrame janela = new JFrame("Conversor de PDF para TXT");
 	JTextArea caixaDeTexto = new JTextArea();
+	JScrollPane barraRolagem = new JScrollPane(caixaDeTexto);
 
-	@SuppressWarnings("deprecation")
+	
 	public Janela() {
 
 		painel.setLayout(new BorderLayout());
@@ -36,24 +41,41 @@ public class Janela {
 		
 		
 
-		painel.add(botao,BorderLayout.NORTH);
-		painel.add(caixaDeTexto,BorderLayout.SOUTH);
-
+		painel.add(botaoProcurarArquivo,BorderLayout.NORTH);
+		painel.add(botaoCalcularValores,BorderLayout.EAST);
+		painel.add(barraRolagem);
+		janela.pack();
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		janela.setSize(screenSize.width, screenSize.height);
 		janela.add(painel);
+		
 		janela.setVisible(true);
-		
 		janela.setLocationRelativeTo(null);
-		// janela.pack();
 		
 		
-		botao.setLabel("Procurar Arquivo");
-		botao.addActionListener(new ActionListener() {
+		
+		botaoProcurarArquivo.setText("Procurar Arquivo");
+		botaoCalcularValores.setText("Calcular Valores:");
+		
+		
+		botaoProcurarArquivo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					procuraArquivoPDFNoComputador();
 				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		
+		botaoCalcularValores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)  {
+				//procuraArquivoPDFNoComputador();
+				try {
+					ValorMultilateralProduto.obtemValoresParaSoma(caixaDeTexto.getText());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
