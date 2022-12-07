@@ -8,7 +8,7 @@ public class ValorMultilateralProduto {
 
 	public static void obtemValoresParaSoma(String textoConvertido) throws IOException {
 
-		Pattern p = Pattern.compile(".*Multilateral Produto:\\s([\\d+.,]).*");
+		Pattern p = Pattern.compile(".*Multilateral Produto:\\s([\\d+.,]).*"); 
 
 
 			Matcher m = p.matcher(textoConvertido);
