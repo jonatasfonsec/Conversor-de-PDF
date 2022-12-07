@@ -8,19 +8,14 @@ public class ValorMultilateralProduto {
 
 	public static void obtemValoresParaSoma(String textoConvertido) throws IOException {
 
-		//Pattern p = Pattern.compile("(Multilateral):(\\d+[.]\\d\\d)");
-		//Pattern p = Pattern.compile("Multilateral");
-		Pattern p = Pattern.compile("(Multilateral Produto:)|(\\d+[.]\\d+[,]\\d\\d)");
+		Pattern p = Pattern.compile(".*Multilateral Produto:\\s([\\d+.,]).*");
 
-		//while ((textoConvertido = buffer.readLine()) != null) {}
 
 			Matcher m = p.matcher(textoConvertido);
 			
 			while (m.find()) {
 
-				//System.out.println(m.group(1) + "\t" + m.group(2));
-				System.out.println(m.group());
-				//System.out.println(m.group(2));
+				System.out.println(m.group(0));
 
 			}
 
