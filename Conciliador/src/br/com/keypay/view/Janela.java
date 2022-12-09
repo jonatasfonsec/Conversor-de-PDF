@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -71,13 +72,7 @@ public class Janela {
 		
 		botaoCalcularValores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)  {
-				//procuraArquivoPDFNoComputador();
-				try {
-					ValorMultilateralProduto.obtemValoresParaSoma(caixaDeTexto.getText());
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				ValorMultilateralProduto.obtemValoresParaSoma(caixaDeTexto.getText());
 			}
 		});
 
