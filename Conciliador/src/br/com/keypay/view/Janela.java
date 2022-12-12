@@ -1,12 +1,14 @@
 package br.com.keypay.view;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -38,8 +40,7 @@ public class Janela {
 		painel.setLayout(new BorderLayout());
 		caixaDeTexto.setVisible(true);
 		caixaDeTexto.setLineWrap(true);
-		caixaDeTexto.setBounds(50, 50, 500, 500);
-		
+	
 		
 
 		painel.add(botaoProcurarArquivo,BorderLayout.NORTH);

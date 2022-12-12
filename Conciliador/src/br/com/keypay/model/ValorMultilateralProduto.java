@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 public class ValorMultilateralProduto {
 
 	static DecimalFormat df = new DecimalFormat("###,###,###.00");
+	static String palavraConsultada="";
 	static String regexp = "multilateral\\s+produto\\s*:\\s*([\\d.,]+)\\s*";
 	static Pattern MULTILATERAL_PRODUTO = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
 	static Scanner scanner = null;
@@ -35,6 +36,7 @@ public class ValorMultilateralProduto {
 			JOptionPane.showMessageDialog (null, dx);
 		} finally {
 			scanner.close();
+			soma=0;
 		}
 	}
 
