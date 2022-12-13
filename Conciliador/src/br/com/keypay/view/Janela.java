@@ -30,7 +30,7 @@ public class Janela {
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
 	Dimension screenSize = toolkit.getScreenSize();
 	JPanel painel = new JPanel();
-	JFrame janela = new JFrame("Conversor de PDF para TXT");
+	JFrame janela = new JFrame("Soma valores Valor Lançamento + Valor MultiLateral");
 	JTextArea caixaDeTexto = new JTextArea();
 	JScrollPane barraRolagem = new JScrollPane(caixaDeTexto);
 

@@ -1,8 +1,6 @@
 package br.com.keypay.model;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,12 +10,14 @@ import javax.swing.JOptionPane;
 public class ValorMultilateralProduto {
 
 	static DecimalFormat df = new DecimalFormat("###,###,###.00");
-	static String palavraConsultada="";
-	static String regexp = "multilateral\\s+produto\\s*:\\s*([\\d.,]+)\\s*";
+//	static String regexp = "multilateral\\s+produto\\s*:\\s*([\\d.,]+)\\s*"; - KEYPAY
+//	static String regexp = "(Produto|Lançamento\\s):\\s([\\d.,]+)"; - CONTABILIDADE
+	static String regexp = "(Produto|Lançamento\\s):\\s([\\d.,]+)";
 	static Pattern MULTILATERAL_PRODUTO = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
 	static Scanner scanner = null;
 	static double soma = 0;
 
+	
 	public static void obtemValoresParaSoma(String textoConvertido) {
 
 
@@ -28,7 +28,7 @@ public class ValorMultilateralProduto {
 				Matcher matcher = MULTILATERAL_PRODUTO.matcher(linha);
 				if (!matcher.find())
 					continue;
-				String valorString = matcher.group(1);
+				String valorString = matcher.group(2);
 				Double valorDouble = Double.parseDouble(valorString.trim().replaceAll("\\.", "").replace(",", "."));
 				soma += valorDouble;
 			}
