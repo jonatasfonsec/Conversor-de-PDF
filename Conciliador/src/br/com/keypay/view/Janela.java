@@ -1,10 +1,7 @@
 package br.com.keypay.view;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,42 +21,39 @@ import br.com.keypay.model.ValorMultilateralProduto;
 
 public class Janela {
 	
+	//Componentes da Janela
 	
+	//Botões
 	JButton botaoProcurarArquivo = new JButton();
 	JButton botaoCalcularValores = new JButton();
+	
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
 	Dimension screenSize = toolkit.getScreenSize();
+	
 	JPanel painel = new JPanel();
 	JFrame janela = new JFrame("Soma valores Valor Lançamento + Valor MultiLateral");
-	JTextArea caixaDeTexto = new JTextArea();
+	static JTextArea caixaDeTexto = new JTextArea();
 	JScrollPane barraRolagem = new JScrollPane(caixaDeTexto);
 
 	
 	public Janela() {
-
-		painel.setLayout(new BorderLayout());
-		caixaDeTexto.setVisible(true);
-		caixaDeTexto.setLineWrap(true);
-	
 		
-
+		caixaDeTexto.setVisible(true);
+		
+		painel.setLayout(new BorderLayout(1,1));
 		painel.add(botaoProcurarArquivo,BorderLayout.NORTH);
 		painel.add(botaoCalcularValores,BorderLayout.EAST);
 		painel.add(barraRolagem);
+		
 		janela.pack();
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		janela.setSize(screenSize.width, screenSize.height);
 		janela.add(painel);
-		
 		janela.setVisible(true);
 		janela.setLocationRelativeTo(null);
 		
-		
-		
 		botaoProcurarArquivo.setText("Procurar Arquivo");
 		botaoCalcularValores.setText("Calcular Valores:");
-		
-		
 		botaoProcurarArquivo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -70,14 +64,12 @@ public class Janela {
 			}
 		});
 		
-		
 		botaoCalcularValores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)  {
 				ValorMultilateralProduto.obtemValoresParaSoma(caixaDeTexto.getText());
+				ValorMultilateralProduto.destacaValoresDaSomaEmTela(caixaDeTexto.getText());
 			}
 		});
-
-		
 
 	}
 	
@@ -93,15 +85,17 @@ public class Janela {
 		int returnValue = jfc.showOpenDialog(null);
 
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			
 			recebeStringDoArquivoPDF(arquivoPDF.leArquivoPDFEArmazenaEmString(jfc.getSelectedFile().getPath()));
 		}
-		
+	}
+	
+	public static void defineTextoNaCaixaDeTexto(String s) {
+		caixaDeTexto.append(s+"/n");
 	}
 	
 	public void recebeStringDoArquivoPDF(String textoDoArquivoPDF) {
 		//Passa a string do texto convertido para o box
-		caixaDeTexto.setText(textoDoArquivoPDF);
+		defineTextoNaCaixaDeTexto(textoDoArquivoPDF);
 	}
 	
 	
