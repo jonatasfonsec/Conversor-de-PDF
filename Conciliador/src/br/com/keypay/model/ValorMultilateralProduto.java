@@ -21,10 +21,12 @@ public class ValorMultilateralProduto extends Janela {
 	static Pattern MULTILATERAL_PRODUTO = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
 	static Scanner scanner = null;
 	static double somaTotal = 0;
+	static ArrayList<String> valoresEmTela = new ArrayList<String>() ;
 
 	public static void obtemValoresParaSoma(String textoConvertido) {
 
 		try {
+			System.out.print(textoConvertido);
 			scanner = new Scanner(textoConvertido);
 			while (scanner.hasNextLine()) {
 				String linha = scanner.nextLine();
@@ -33,6 +35,8 @@ public class ValorMultilateralProduto extends Janela {
 					continue;
 
 				String valorString = (matcher.group(2));
+				valoresEmTela.add(valorString);
+				valoresEmTela.add("");
 
 				Double valorDouble = Double.parseDouble(valorString.trim().replaceAll("\\.", "").replace(",", "."));
 				somaTotal += valorDouble;
@@ -40,29 +44,23 @@ public class ValorMultilateralProduto extends Janela {
 
 			String dx = ("Total de Valores Multilateral Produto: R$ " + df.format(somaTotal));
 			JOptionPane.showMessageDialog(null, dx);
+			defineTextoNaCaixaDeTexto(dx+"\n");
 
 		} finally {
 			scanner.close();
 			somaTotal = 0;
 		}
 	}
-
-	public static void destacaValoresDaSomaEmTela(String textoConvertido) {
-
-		try {
-			scanner = new Scanner(textoConvertido);
-
-			String linha = scanner.nextLine();
-			Matcher matcher = MULTILATERAL_PRODUTO.matcher(linha);
-			while (scanner.hasNextLine()) {
-				String valorString = (matcher.group(2));
-				defineTextoNaCaixaDeTexto(valorString);
-				System.out.println(valorString);
-
-			}
-		} finally {
-			scanner.close();
-		}
+	
+	public static ArrayList<String> getvaloresEmTela() {
+		
+		ArrayList<String> listaDeValores = valoresEmTela;
+		return listaDeValores;
+		
 	}
+	
+	
+
+
 
 }

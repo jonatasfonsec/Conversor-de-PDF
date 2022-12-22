@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -67,7 +68,11 @@ public class Janela {
 		botaoCalcularValores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)  {
 				ValorMultilateralProduto.obtemValoresParaSoma(caixaDeTexto.getText());
-				ValorMultilateralProduto.destacaValoresDaSomaEmTela(caixaDeTexto.getText());
+				ArrayList <String> valores = ValorMultilateralProduto.getvaloresEmTela();
+				for(String s:valores) {
+					defineTextoNaCaixaDeTexto(s+"\n");
+				}
+				
 			}
 		});
 
@@ -90,7 +95,9 @@ public class Janela {
 	}
 	
 	public static void defineTextoNaCaixaDeTexto(String s) {
-		caixaDeTexto.append(s+"/n");
+		caixaDeTexto.append(s);
+//		caixaDeTexto.setText(s);
+		
 	}
 	
 	public void recebeStringDoArquivoPDF(String textoDoArquivoPDF) {
